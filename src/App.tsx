@@ -1,171 +1,215 @@
 import React from 'react'
-import { Box, Container, Typography, Button, Card, CardContent, Stack, Chip } from '@mui/material'
-import { Add, Home, Search, Person, Palette } from '@mui/icons-material'
+import { Box, AppBar, Toolbar, Typography, Fab, BottomNavigation, BottomNavigationAction } from '@mui/material'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faMap,
+  faWrench,
+  faQrcode,
+  faCogs,
+  faBars
+} from '@fortawesome/free-solid-svg-icons'
 import { useColors } from './theme/useColors'
+import SafeArea from './components/SafeArea'
 
 function App() {
   const colors = useColors()
+  const [value, setValue] = React.useState(0)
 
   return (
-    <Box sx={{ 
-      width: '100vw', 
-      height: '100vh', 
+    <Box sx={{
+      minHeight: '100vh',
       bgcolor: 'background.default',
       display: 'flex',
       flexDirection: 'column'
     }}>
-      {/* App Header */}
-      <Box sx={{ 
-        background: colors.gradients.primary,
-        color: 'white',
-        p: 2,
-        boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)'
-      }}>
-        <Typography variant="h5" fontWeight={500} sx={{ color: 'white' }}>
-          R-One App
-        </Typography>
-        <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>
-          Custom Gradient Color Palette Demo
-        </Typography>
-      </Box>
+      {/* Fixed Header with Safe Area */}
+      <SafeArea variant="top" fixed>
+        <AppBar
+          position="static"
+          sx={{
+            background: colors.gradients.primary,
+            boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
+            borderRadius: 0,
+            minHeight: 'auto',
+            '@media (max-width: 480px)': {
+              minHeight: 'auto',
+            }
+          }}
+        >
+          <Toolbar sx={{
+            minHeight: 'auto',
+            paddingTop: 'env(safe-area-inset-top)',
+            paddingY: { xs: 1, sm: 1.5, md: 2 },
+            '@media (max-width: 480px)': {
+              paddingY: 0.5,
+            }
+          }}>
+            <Typography
+              variant="h5"
+              fontWeight={500}
+              sx={{
+                color: 'white',
+                flexGrow: 1,
+                fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
+                lineHeight: { xs: 1.2, sm: 1.3, md: 1.4 }
+              }}
+            >
+              R-One App
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </SafeArea>
 
-      {/* Main Content Area */}
-      <Container maxWidth="sm" sx={{ flex: 1, py: 3 }}>
-        <Stack spacing={3}>
-          {/* Color Palette Demo */}
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Your Custom Color Palette
-              </Typography>
-              <Typography variant="body2" color="text.secondary" paragraph>
-                All colors are centralized in one place for easy editing.
-              </Typography>
-              
-              {/* Primary Colors */}
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="subtitle2" gutterBottom>Primary Colors</Typography>
-                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                  <Chip 
-                    label="Primary" 
-                    sx={{ bgcolor: colors.primary, color: 'white' }} 
-                  />
-                  <Chip 
-                    label="Light" 
-                    sx={{ bgcolor: colors.palette.primary.light, color: 'white' }} 
-                  />
-                  <Chip 
-                    label="Dark" 
-                    sx={{ bgcolor: colors.palette.primary.dark, color: 'white' }} 
-                  />
-                </Stack>
-              </Box>
+      {/* Empty Content Area */}
+      <SafeArea variant="content">
+        <Box sx={{ flex: 1 }} />
+      </SafeArea>
 
-              {/* Secondary Colors */}
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="subtitle2" gutterBottom>Secondary Colors</Typography>
-                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                  <Chip 
-                    label="Secondary" 
-                    sx={{ bgcolor: colors.secondary, color: 'white' }} 
-                  />
-                  <Chip 
-                    label="Light" 
-                    sx={{ bgcolor: colors.palette.secondary.light, color: 'white' }} 
-                  />
-                  <Chip 
-                    label="Dark" 
-                    sx={{ bgcolor: colors.palette.secondary.dark, color: 'white' }} 
-                  />
-                </Stack>
-              </Box>
+      {/* Fixed Bottom Navigation with Safe Area */}
+      <SafeArea variant="bottom" fixed>
+        <Box
+          sx={{
+            position: 'relative',
+            background: colors.surface,
+            borderTop: `1px solid ${colors.surfaceVariant}`,
+            paddingBottom: 'env(safe-area-inset-bottom)',
+            minHeight: 'auto'
+          }}
+        >
+          {/* Main Bottom Navigation */}
+          <BottomNavigation
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue)
+            }}
+            showLabels
+            sx={{
+              height: 70,
+              background: 'transparent',
+              '& .MuiBottomNavigationAction-root': {
+                minWidth: 'auto',
+                padding: '6px 4px',
+                color: colors.textSecondary,
+                transition: 'all 0.2s ease-in-out',
+                '&.Mui-selected': {
+                  color: 'transparent',
+                  background: colors.gradients.primary,
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  '& .MuiBottomNavigationAction-label': {
+                    background: colors.gradients.primary,
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    fontWeight: 600,
+                  },
+                  '& .MuiSvgIcon-root': {
+                    background: colors.gradients.primary,
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  },
+                },
+                '& .MuiBottomNavigationAction-label': {
+                  fontSize: '0.7rem',
+                  fontWeight: 500,
+                  marginTop: '6px',
+                  transition: 'all 0.2s ease-in-out',
+                },
+                '& .MuiSvgIcon-root': {
+                  fontSize: '1.2rem',
+                  transition: 'all 0.2s ease-in-out',
+                },
+                '&:hover': {
+                  color: colors.primary,
+                  transform: 'translateY(-1px)',
+                },
+              },
+            }}
+          >
+            <BottomNavigationAction
+              label="Map"
+              value="map"
+              icon={<FontAwesomeIcon icon={faMap} style={{ fontSize: '1.2rem' }} />}
+              sx={{
+                flex: 1,
+                maxWidth: '20%',
+              }}
+            />
+            <BottomNavigationAction
+              label="Installation"
+              value="installation"
+              icon={<FontAwesomeIcon icon={faWrench} style={{ fontSize: '1.2rem' }} />}
+              sx={{
+                flex: 1,
+                maxWidth: '20%',
+              }}
+            />
+            {/* Empty space for FAB */}
+            <Box sx={{ flex: 1, maxWidth: '20%' }} />
+            <BottomNavigationAction
+              label="Service"
+              value="service"
+              icon={<FontAwesomeIcon icon={faCogs} style={{ fontSize: '1.2rem' }} />}
+              sx={{
+                flex: 1,
+                maxWidth: '20%',
+              }}
+            />
+            <BottomNavigationAction
+              label="More"
+              value="more"
+              icon={<FontAwesomeIcon icon={faBars} style={{ fontSize: '1.2rem' }} />}
+              sx={{
+                flex: 1,
+                maxWidth: '20%',
+              }}
+            />
+          </BottomNavigation>
 
-              {/* Tertiary Colors */}
-              <Box sx={{ mb: 2 }}>
-                <Typography variant="subtitle2" gutterBottom>Tertiary Colors</Typography>
-                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                  <Chip 
-                    label="Tertiary" 
-                    sx={{ bgcolor: colors.tertiary, color: 'white' }} 
-                  />
-                  <Chip 
-                    label="Light" 
-                    sx={{ bgcolor: colors.palette.tertiary.light, color: 'white' }} 
-                  />
-                  <Chip 
-                    label="Dark" 
-                    sx={{ bgcolor: colors.palette.tertiary.dark, color: 'white' }} 
-                  />
-                </Stack>
-              </Box>
-            </CardContent>
-          </Card>
-
-          {/* Semantic Colors */}
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Semantic Colors
-              </Typography>
-              <Stack spacing={2}>
-                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                  <Chip label="Error" sx={{ bgcolor: colors.error, color: 'white' }} />
-                  <Chip label="Warning" sx={{ bgcolor: colors.warning, color: 'white' }} />
-                  <Chip label="Success" sx={{ bgcolor: colors.success, color: 'white' }} />
-                  <Chip label="Info" sx={{ bgcolor: colors.info, color: 'white' }} />
-                </Stack>
-              </Stack>
-            </CardContent>
-          </Card>
-
-          {/* Gradient Buttons Demo */}
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Gradient Buttons
-              </Typography>
-              <Typography variant="body2" color="text.secondary" paragraph>
-                All buttons now use your custom gradient (Primary + Secondary + Tertiary)
-              </Typography>
-              
-              <Stack spacing={2}>
-                <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
-                  <Button variant="contained" size="large">
-                    Contained Button
-                  </Button>
-                  <Button variant="outlined" size="large">
-                    Outlined Button
-                  </Button>
-                  <Button variant="text" size="large">
-                    Text Button
-                  </Button>
-                </Stack>
-                
-                <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
-                  <Button variant="contained" startIcon={<Palette />}>
-                    With Icon
-                  </Button>
-                  <Button variant="outlined" endIcon={<Add />}>
-                    End Icon
-                  </Button>
-                </Stack>
-                
-                <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
-                  <Button variant="contained" size="small">
-                    Small
-                  </Button>
-                  <Button variant="contained" size="medium">
-                    Medium
-                  </Button>
-                  <Button variant="contained" size="large">
-                    Large
-                  </Button>
-                </Stack>
-              </Stack>
-            </CardContent>
-          </Card>
-        </Stack>
-      </Container>
+          {/* R-Vision FAB Button */}
+          <Fab
+            color="primary"
+            aria-label="R-Vision"
+            sx={{
+              position: 'absolute',
+              top: -18,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: 52,
+              height: 52,
+              background: colors.gradients.primary,
+              boxShadow: '0px 3px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30)',
+              transition: 'all 0.2s ease-in-out',
+              '&:hover': {
+                background: colors.gradients.primaryDark,
+                boxShadow: '0px 5px 10px 3px rgba(0, 0, 0, 0.20), 0px 2px 4px 0px rgba(0, 0, 0, 0.40)',
+                transform: 'translateX(-50%) translateY(-2px)',
+              },
+              '&:active': {
+                transform: 'translateX(-50%) translateY(0px)',
+              },
+              '& .MuiSvgIcon-root': {
+                fontSize: '1.5rem',
+                color: 'white',
+              },
+            }}
+            onClick={() => {
+              setValue('r-vision')
+              // Handle R-Vision action
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faQrcode}
+              style={{
+                fontSize: '1.5rem',
+                color: 'white'
+              }}
+            />
+          </Fab>
+        </Box>
+      </SafeArea>
     </Box>
   )
 }

@@ -1,7 +1,8 @@
 import { createTheme } from '@mui/material/styles'
 import { colors } from './theme/colors'
+import { typescale } from './theme/typescale'
 
-// Material Design 3 theme using centralized color palette
+// Material Design 3 theme using centralized color palette and typescale
 const material3Theme = createTheme({
   palette: {
     mode: 'light',
@@ -53,83 +54,87 @@ const material3Theme = createTheme({
   },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    
+    // Display styles
     h1: {
-      fontSize: '2.5rem',
-      fontWeight: 400,
-      lineHeight: 1.2,
-      letterSpacing: '-0.02em',
+      ...typescale.display.large,
     },
     h2: {
-      fontSize: '2rem',
-      fontWeight: 400,
-      lineHeight: 1.25,
-      letterSpacing: '-0.01em',
+      ...typescale.display.medium,
     },
     h3: {
-      fontSize: '1.75rem',
-      fontWeight: 400,
-      lineHeight: 1.29,
-      letterSpacing: '0em',
+      ...typescale.display.small,
     },
+    
+    // Headline styles
     h4: {
-      fontSize: '1.5rem',
-      fontWeight: 400,
-      lineHeight: 1.33,
-      letterSpacing: '0.01em',
+      ...typescale.headline.large,
     },
     h5: {
-      fontSize: '1.25rem',
-      fontWeight: 400,
-      lineHeight: 1.4,
-      letterSpacing: '0em',
+      ...typescale.headline.medium,
     },
     h6: {
-      fontSize: '1.125rem',
-      fontWeight: 500,
-      lineHeight: 1.44,
-      letterSpacing: '0.01em',
+      ...typescale.headline.small,
     },
+    
+    // Body styles
     body1: {
-      fontSize: '1rem',
-      fontWeight: 400,
-      lineHeight: 1.5,
-      letterSpacing: '0.01em',
+      ...typescale.body.large,
     },
     body2: {
-      fontSize: '0.875rem',
-      fontWeight: 400,
-      lineHeight: 1.43,
-      letterSpacing: '0.01em',
+      ...typescale.body.medium,
     },
+    
+    // Title styles
+    subtitle1: {
+      ...typescale.title.large,
+    },
+    subtitle2: {
+      ...typescale.title.medium,
+    },
+    
+    // Label styles
     button: {
-      fontSize: '0.875rem',
-      fontWeight: 500,
-      lineHeight: 1.75,
-      letterSpacing: '0.01em',
+      ...typescale.label.large,
       textTransform: 'none',
     },
     caption: {
-      fontSize: '0.75rem',
-      fontWeight: 400,
-      lineHeight: 1.33,
-      letterSpacing: '0.02em',
+      ...typescale.label.medium,
     },
     overline: {
-      fontSize: '0.625rem',
-      fontWeight: 500,
-      lineHeight: 1.6,
-      letterSpacing: '0.05em',
+      ...typescale.label.small,
       textTransform: 'uppercase',
     },
   },
   shape: {
     borderRadius: 16, // Material 3 uses 16px border radius
   },
+  spacing: (factor: number) => `${8 * factor}px`, // Material 3 uses 8px base spacing
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          // Ensure safe areas are respected globally
+          paddingTop: 'env(safe-area-inset-top)',
+          paddingBottom: 'env(safe-area-inset-bottom)',
+          paddingLeft: 'env(safe-area-inset-left)',
+          paddingRight: 'env(safe-area-inset-right)',
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 20, // Material 3 button radius
+          borderRadius: 8, // 2pt = 8px border radius
           textTransform: 'none',
           fontWeight: 500,
           padding: '10px 24px',
@@ -163,18 +168,48 @@ const material3Theme = createTheme({
             transform: 'translateY(-1px)',
           },
           '&:active': {
+            background: `linear-gradient(135deg, ${colors.primary.dark} 0%, ${colors.secondary.dark} 50%, ${colors.tertiary.dark} 100%)`,
             transform: 'translateY(0px)',
+          },
+          '&:focus': {
+            outline: 'none',
+            background: `linear-gradient(135deg, ${colors.primary.main} 0%, ${colors.secondary.main} 50%, ${colors.tertiary.main} 100%)`,
+            boxShadow: 'none',
+            transform: 'none',
+          },
+          '&:focus-visible': {
+            outline: 'none',
+            background: `linear-gradient(135deg, ${colors.primary.main} 0%, ${colors.secondary.main} 50%, ${colors.tertiary.main} 100%)`,
+            boxShadow: 'none',
+            transform: 'none',
           },
         },
         outlined: {
           borderWidth: 2,
-          borderImage: `linear-gradient(135deg, ${colors.primary.main}, ${colors.secondary.main}, ${colors.tertiary.main}) 1`,
+          borderColor: colors.primary.main,
           background: 'transparent',
           color: colors.primary.main,
           '&:hover': {
-            background: `linear-gradient(135deg, ${colors.primary.main} 0%, ${colors.secondary.main} 50%, ${colors.tertiary.main} 100%)`,
-            color: '#FFFFFF',
-            borderColor: 'transparent',
+            borderColor: colors.secondary.main,
+            background: 'transparent',
+            color: colors.secondary.main,
+          },
+          '&:active': {
+            borderColor: colors.tertiary.main,
+            background: 'transparent',
+            color: colors.tertiary.main,
+          },
+          '&:focus': {
+            outline: 'none',
+            borderColor: colors.primary.main,
+            background: 'transparent',
+            color: colors.primary.main,
+          },
+          '&:focus-visible': {
+            outline: 'none',
+            borderColor: colors.primary.main,
+            background: 'transparent',
+            color: colors.primary.main,
           },
         },
         text: {
@@ -220,6 +255,19 @@ const material3Theme = createTheme({
           backgroundColor: colors.surface.main,
           color: colors.text.primary,
           boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30)',
+          minHeight: 'auto',
+        },
+      },
+    },
+    MuiToolbar: {
+      styleOverrides: {
+        root: {
+          minHeight: 'auto',
+          '@media (max-width: 480px)': {
+            minHeight: 'auto',
+            paddingTop: 'env(safe-area-inset-top)',
+            paddingBottom: '8px',
+          },
         },
       },
     },
