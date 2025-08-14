@@ -1,146 +1,84 @@
 import React from 'react'
-import iPhoneFrame from './components/iPhoneFrame'
-import PWAInstallPrompt from './components/PWAInstallPrompt'
-import InstallButton from './components/InstallButton'
+import { Box, Container, Typography, Button, Card, CardContent, Stack } from '@mui/material'
+import { Add, Home, Search, Person } from '@mui/icons-material'
 
 function App() {
   return (
-    <>
-      <iPhoneFrame title="R-One App">
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        gap: '20px',
-        padding: '20px'
+    <Box sx={{ 
+      width: '100vw', 
+      height: '100vh', 
+      bgcolor: 'background.default',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
+      {/* Material 3 App Header */}
+      <Box sx={{ 
+        bgcolor: 'surface.main',
+        borderBottom: '1px solid',
+        borderColor: 'surface.variant',
+        p: 2
       }}>
-        {/* Welcome Section */}
-        <div style={{
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          borderRadius: '16px',
-          padding: '24px',
-          color: 'white',
-          textAlign: 'center'
-        }}>
-          <h1 style={{ fontSize: '24px', marginBottom: '8px' }}>
-            Welcome to R-One
-          </h1>
-          <p style={{ fontSize: '16px', opacity: 0.9 }}>
-            Your mobile app prototype
-          </p>
-        </div>
+        <Typography variant="h5" color="text.primary" fontWeight={500}>
+          R-One App
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Material Design 3 Prototype
+        </Typography>
+      </Box>
 
-        {/* Feature Cards */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <div style={{
-            background: 'white',
-            borderRadius: '12px',
-            padding: '16px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px'
-          }}>
-            <div style={{
-              width: '40px',
-              height: '40px',
-              background: '#667eea',
-              borderRadius: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontSize: '20px'
-            }}>
-              📱
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', marginBottom: '4px' }}>Mobile First</h3>
-              <p style={{ fontSize: '14px', color: '#666' }}>
-                Designed for mobile devices
-              </p>
-            </div>
-          </div>
+      {/* Main Content Area */}
+      <Container maxWidth="sm" sx={{ flex: 1, py: 3 }}>
+        <Stack spacing={3}>
+          {/* Welcome Card */}
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Welcome to Material 3
+              </Typography>
+              <Typography variant="body2" color="text.secondary" paragraph>
+                This app is built with Google's latest Material Design 3 (Material You) design system.
+              </Typography>
+              <Button variant="contained" startIcon={<Add />}>
+                Get Started
+              </Button>
+            </CardContent>
+          </Card>
 
-          <div style={{
-            background: 'white',
-            borderRadius: '12px',
-            padding: '16px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px'
-          }}>
-            <div style={{
-              width: '40px',
-              height: '40px',
-              background: '#764ba2',
-              borderRadius: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontSize: '20px'
-            }}>
-              ⚡
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', marginBottom: '4px' }}>Fast & Responsive</h3>
-              <p style={{ fontSize: '14px', color: '#666' }}>
-                Built with React and TypeScript
-              </p>
-            </div>
-          </div>
+          {/* Feature Cards */}
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Material 3 Features
+              </Typography>
+              <Stack spacing={2}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Home color="primary" />
+                  <Typography variant="body2">Dynamic color system</Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Search color="secondary" />
+                  <Typography variant="body2">Enhanced accessibility</Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Person color="tertiary" />
+                  <Typography variant="body2">Personalized experience</Typography>
+                </Box>
+              </Stack>
+            </CardContent>
+          </Card>
 
-          <div style={{
-            background: 'white',
-            borderRadius: '12px',
-            padding: '16px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px'
-          }}>
-            <div style={{
-              width: '40px',
-              height: '40px',
-              background: '#f093fb',
-              borderRadius: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontSize: '20px'
-            }}>
-              🎨
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', marginBottom: '4px' }}>Beautiful UI</h3>
-              <p style={{ fontSize: '14px', color: '#666' }}>
-                Modern and intuitive design
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Action Button */}
-        <button style={{
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          color: 'white',
-          border: 'none',
-          borderRadius: '12px',
-          padding: '16px',
-          fontSize: '16px',
-          fontWeight: '600',
-          cursor: 'pointer',
-          marginTop: '20px'
-        }}>
-          Get Started
-        </button>
-      </div>
-    </iPhoneFrame>
-    <PWAInstallPrompt />
-    <InstallButton />
-    </>
+          {/* Action Buttons */}
+          <Stack direction="row" spacing={2} justifyContent="center">
+            <Button variant="outlined" color="primary">
+              Learn More
+            </Button>
+            <Button variant="contained" color="primary">
+              Explore
+            </Button>
+          </Stack>
+        </Stack>
+      </Container>
+    </Box>
   )
 }
 
