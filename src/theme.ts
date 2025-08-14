@@ -1,63 +1,54 @@
 import { createTheme } from '@mui/material/styles'
+import { colors } from './theme/colors'
 
-// Material Design 3 (Material You) color palette
+// Material Design 3 theme using centralized color palette
 const material3Theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#6750A4', // Material 3 primary color
-      light: '#D0BCFF',
-      dark: '#4F378B',
+      main: colors.primary.main,
+      light: colors.primary.light,
+      dark: colors.primary.dark,
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#625B71', // Material 3 secondary color
-      light: '#E8DEF8',
-      dark: '#4A4458',
-      contrastText: '#FFFFFF',
-    },
-    tertiary: {
-      main: '#7D5260', // Material 3 tertiary color
-      light: '#FFB4AB',
-      dark: '#633B48',
+      main: colors.secondary.main,
+      light: colors.secondary.light,
+      dark: colors.secondary.dark,
       contrastText: '#FFFFFF',
     },
     error: {
-      main: '#BA1A1A', // Material 3 error color
-      light: '#FFB4AB',
-      dark: '#93000A',
+      main: colors.error.main,
+      light: colors.error.light,
+      dark: colors.error.dark,
       contrastText: '#FFFFFF',
     },
     warning: {
-      main: '#FF8F00', // Material 3 warning color
-      light: '#FFB74D',
-      dark: '#F57C00',
+      main: colors.warning.main,
+      light: colors.warning.light,
+      dark: colors.warning.dark,
       contrastText: '#000000',
     },
     info: {
-      main: '#006C51', // Material 3 info color
-      light: '#4CAF50',
-      dark: '#2E7D32',
+      main: colors.info.main,
+      light: colors.info.light,
+      dark: colors.info.dark,
       contrastText: '#FFFFFF',
     },
     success: {
-      main: '#006C51', // Material 3 success color
-      light: '#4CAF50',
-      dark: '#2E7D32',
+      main: colors.success.main,
+      light: colors.success.light,
+      dark: colors.success.dark,
       contrastText: '#FFFFFF',
     },
     background: {
-      default: '#FFFBFE', // Material 3 surface color
-      paper: '#FFFBFE',
-    },
-    surface: {
-      main: '#FFFBFE',
-      variant: '#E7E0EC',
+      default: colors.background.default,
+      paper: colors.background.paper,
     },
     text: {
-      primary: '#1C1B1F',
-      secondary: '#49454F',
-      disabled: '#9CA38B',
+      primary: colors.text.primary,
+      secondary: colors.text.secondary,
+      disabled: colors.text.disabled,
     },
   },
   typography: {
@@ -185,8 +176,8 @@ const material3Theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#FFFBFE',
-          color: '#1C1B1F',
+          backgroundColor: colors.surface.main,
+          color: colors.text.primary,
           boxShadow: '0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30)',
         },
       },
@@ -194,8 +185,8 @@ const material3Theme = createTheme({
     MuiBottomNavigation: {
       styleOverrides: {
         root: {
-          backgroundColor: '#FFFBFE',
-          borderTop: '1px solid #E7E0EC',
+          backgroundColor: colors.surface.main,
+          borderTop: `1px solid ${colors.surface.variant}`,
         },
       },
     },

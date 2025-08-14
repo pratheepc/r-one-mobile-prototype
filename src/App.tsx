@@ -1,8 +1,11 @@
 import React from 'react'
-import { Box, Container, Typography, Button, Card, CardContent, Stack } from '@mui/material'
-import { Add, Home, Search, Person } from '@mui/icons-material'
+import { Box, Container, Typography, Button, Card, CardContent, Stack, Chip } from '@mui/material'
+import { Add, Home, Search, Person, Palette } from '@mui/icons-material'
+import { useColors } from './theme/useColors'
 
 function App() {
+  const colors = useColors()
+
   return (
     <Box sx={{ 
       width: '100vw', 
@@ -11,7 +14,7 @@ function App() {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      {/* Material 3 App Header */}
+      {/* App Header */}
       <Box sx={{ 
         bgcolor: 'surface.main',
         borderBottom: '1px solid',
@@ -22,47 +25,95 @@ function App() {
           R-One App
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Material Design 3 Prototype
+          Custom Color Palette Demo
         </Typography>
       </Box>
 
       {/* Main Content Area */}
       <Container maxWidth="sm" sx={{ flex: 1, py: 3 }}>
         <Stack spacing={3}>
-          {/* Welcome Card */}
+          {/* Color Palette Demo */}
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
-                Welcome to Material 3
+                Your Custom Color Palette
               </Typography>
               <Typography variant="body2" color="text.secondary" paragraph>
-                This app is built with Google's latest Material Design 3 (Material You) design system.
+                All colors are centralized in one place for easy editing.
               </Typography>
-              <Button variant="contained" startIcon={<Add />}>
-                Get Started
-              </Button>
+              
+              {/* Primary Colors */}
+              <Box sx={{ mb: 2 }}>
+                <Typography variant="subtitle2" gutterBottom>Primary Colors</Typography>
+                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                  <Chip 
+                    label="Primary" 
+                    sx={{ bgcolor: colors.primary, color: 'white' }} 
+                  />
+                  <Chip 
+                    label="Light" 
+                    sx={{ bgcolor: colors.palette.primary.light, color: 'white' }} 
+                  />
+                  <Chip 
+                    label="Dark" 
+                    sx={{ bgcolor: colors.palette.primary.dark, color: 'white' }} 
+                  />
+                </Stack>
+              </Box>
+
+              {/* Secondary Colors */}
+              <Box sx={{ mb: 2 }}>
+                <Typography variant="subtitle2" gutterBottom>Secondary Colors</Typography>
+                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                  <Chip 
+                    label="Secondary" 
+                    sx={{ bgcolor: colors.secondary, color: 'white' }} 
+                  />
+                  <Chip 
+                    label="Light" 
+                    sx={{ bgcolor: colors.palette.secondary.light, color: 'white' }} 
+                  />
+                  <Chip 
+                    label="Dark" 
+                    sx={{ bgcolor: colors.palette.secondary.dark, color: 'white' }} 
+                  />
+                </Stack>
+              </Box>
+
+              {/* Tertiary Colors */}
+              <Box sx={{ mb: 2 }}>
+                <Typography variant="subtitle2" gutterBottom>Tertiary Colors</Typography>
+                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                  <Chip 
+                    label="Tertiary" 
+                    sx={{ bgcolor: colors.tertiary, color: 'white' }} 
+                  />
+                  <Chip 
+                    label="Light" 
+                    sx={{ bgcolor: colors.palette.tertiary.light, color: 'white' }} 
+                  />
+                  <Chip 
+                    label="Dark" 
+                    sx={{ bgcolor: colors.palette.tertiary.dark, color: 'white' }} 
+                  />
+                </Stack>
+              </Box>
             </CardContent>
           </Card>
 
-          {/* Feature Cards */}
+          {/* Semantic Colors */}
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
-                Material 3 Features
+                Semantic Colors
               </Typography>
               <Stack spacing={2}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Home color="primary" />
-                  <Typography variant="body2">Dynamic color system</Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Search color="secondary" />
-                  <Typography variant="body2">Enhanced accessibility</Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Person color="tertiary" />
-                  <Typography variant="body2">Personalized experience</Typography>
-                </Box>
+                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                  <Chip label="Error" sx={{ bgcolor: colors.error, color: 'white' }} />
+                  <Chip label="Warning" sx={{ bgcolor: colors.warning, color: 'white' }} />
+                  <Chip label="Success" sx={{ bgcolor: colors.success, color: 'white' }} />
+                  <Chip label="Info" sx={{ bgcolor: colors.info, color: 'white' }} />
+                </Stack>
               </Stack>
             </CardContent>
           </Card>
@@ -72,8 +123,8 @@ function App() {
             <Button variant="outlined" color="primary">
               Learn More
             </Button>
-            <Button variant="contained" color="primary">
-              Explore
+            <Button variant="contained" color="primary" startIcon={<Palette />}>
+              Customize Colors
             </Button>
           </Stack>
         </Stack>
