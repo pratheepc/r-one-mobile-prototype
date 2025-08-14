@@ -1,9 +1,12 @@
 import React from 'react'
 import iPhoneFrame from './components/iPhoneFrame'
+import PWAInstallPrompt from './components/PWAInstallPrompt'
+import InstallButton from './components/InstallButton'
 
 function App() {
   return (
-    <iPhoneFrame title="R-One App">
+    <>
+      <iPhoneFrame title="R-One App">
       <div style={{ 
         display: 'flex', 
         flexDirection: 'column', 
@@ -135,6 +138,9 @@ function App() {
         </button>
       </div>
     </iPhoneFrame>
+    <PWAInstallPrompt />
+    <InstallButton />
+    </>
   )
 }
 
