@@ -42,6 +42,15 @@ export const useColors = () => {
     
     // Neutral colors
     neutral: colors.neutral,
+    
+    // Gradient helpers
+    gradients: {
+      primary: `linear-gradient(135deg, ${colors.primary.main} 0%, ${colors.secondary.main} 50%, ${colors.tertiary.main} 100%)`,
+      primaryDark: `linear-gradient(135deg, ${colors.primary.dark} 0%, ${colors.secondary.dark} 50%, ${colors.tertiary.dark} 100%)`,
+      primaryLight: `linear-gradient(135deg, ${colors.primary.light} 0%, ${colors.secondary.light} 50%, ${colors.tertiary.light} 100%)`,
+      primaryToSecondary: `linear-gradient(135deg, ${colors.primary.main} 0%, ${colors.secondary.main} 100%)`,
+      secondaryToTertiary: `linear-gradient(135deg, ${colors.secondary.main} 0%, ${colors.tertiary.main} 100%)`,
+    },
   }
 }
 

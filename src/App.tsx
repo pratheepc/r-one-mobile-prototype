@@ -16,16 +16,16 @@ function App() {
     }}>
       {/* App Header */}
       <Box sx={{ 
-        bgcolor: 'surface.main',
-        borderBottom: '1px solid',
-        borderColor: 'surface.variant',
-        p: 2
+        background: colors.gradients.primary,
+        color: 'white',
+        p: 2,
+        boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)'
       }}>
-        <Typography variant="h5" color="text.primary" fontWeight={500}>
+        <Typography variant="h5" fontWeight={500} sx={{ color: 'white' }}>
           R-One App
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Custom Color Palette Demo
+        <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+          Custom Gradient Color Palette Demo
         </Typography>
       </Box>
 
@@ -118,15 +118,52 @@ function App() {
             </CardContent>
           </Card>
 
-          {/* Action Buttons */}
-          <Stack direction="row" spacing={2} justifyContent="center">
-            <Button variant="outlined" color="primary">
-              Learn More
-            </Button>
-            <Button variant="contained" color="primary" startIcon={<Palette />}>
-              Customize Colors
-            </Button>
-          </Stack>
+          {/* Gradient Buttons Demo */}
+          <Card>
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Gradient Buttons
+              </Typography>
+              <Typography variant="body2" color="text.secondary" paragraph>
+                All buttons now use your custom gradient (Primary + Secondary + Tertiary)
+              </Typography>
+              
+              <Stack spacing={2}>
+                <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+                  <Button variant="contained" size="large">
+                    Contained Button
+                  </Button>
+                  <Button variant="outlined" size="large">
+                    Outlined Button
+                  </Button>
+                  <Button variant="text" size="large">
+                    Text Button
+                  </Button>
+                </Stack>
+                
+                <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+                  <Button variant="contained" startIcon={<Palette />}>
+                    With Icon
+                  </Button>
+                  <Button variant="outlined" endIcon={<Add />}>
+                    End Icon
+                  </Button>
+                </Stack>
+                
+                <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+                  <Button variant="contained" size="small">
+                    Small
+                  </Button>
+                  <Button variant="contained" size="medium">
+                    Medium
+                  </Button>
+                  <Button variant="contained" size="large">
+                    Large
+                  </Button>
+                </Stack>
+              </Stack>
+            </CardContent>
+          </Card>
         </Stack>
       </Container>
     </Box>
