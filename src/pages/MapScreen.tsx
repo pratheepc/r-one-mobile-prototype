@@ -1,10 +1,7 @@
-import React from 'react'
 import { Box } from '@mui/material'
 import MapComponent from '../components/Map'
-import { useColors } from '../theme/useColors'
 
 function MapScreen() {
-  const colors = useColors()
 
   return (
     <Box sx={{ 

@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 function StatusBar() {
   const currentTime = new Date().toLocaleTimeString('en-US', {

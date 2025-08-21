@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
-import { Box, Typography, Card, CardContent, IconButton } from '@mui/material'
+import { useState, useEffect } from 'react'
+import { Box, Typography, Card, CardContent } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
-import { useColors } from '../theme/useColors'
 import InstallationChecklist from './InstallationChecklist'
 
 interface WorkScreenProps {
@@ -10,12 +9,11 @@ interface WorkScreenProps {
 }
 
 function WorkScreen({ onInstallationDetailsChange }: WorkScreenProps) {
-  const colors = useColors()
   const [showInstallationDetails, setShowInstallationDetails] = useState(false)
   const [showChecklist, setShowChecklist] = useState(false)
 
   // Notify parent component when installation details state changes
-  React.useEffect(() => {
+  useEffect(() => {
     onInstallationDetailsChange?.(showInstallationDetails)
   }, [showInstallationDetails, onInstallationDetailsChange])
 

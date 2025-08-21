@@ -1,9 +1,9 @@
-import React from 'react'
+import { ReactNode } from 'react'
 
 interface NavigationBarProps {
   title: string
-  leftButton?: React.ReactNode
-  rightButton?: React.ReactNode
+  leftButton?: ReactNode
+  rightButton?: ReactNode
 }
 
 function NavigationBar({ title, leftButton, rightButton }: NavigationBarProps) {

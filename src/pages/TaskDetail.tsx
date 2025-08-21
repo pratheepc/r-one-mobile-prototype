@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { 
   Box, 
   Typography, 
@@ -24,11 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
   faChevronLeft,
   faInfoCircle,
-  faShare,
   faShareAlt,
-  faCalendarAlt,
-  faCircle,
-  faUsers,
   faPlus,
   faTrash,
   faCheck,
@@ -47,11 +43,11 @@ interface TaskDetailProps {
 
 function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
   const [activeTab, setActiveTab] = useState(0)
-  const [selectedAction, setSelectedAction] = useState('Actions')
+
   const [memberSheetOpen, setMemberSheetOpen] = useState(false)
   
   // Debug: Log when memberSheetOpen changes
-  React.useEffect(() => {
+  useEffect(() => {
     console.log('memberSheetOpen changed to:', memberSheetOpen)
   }, [memberSheetOpen])
   const [actionsMenuAnchor, setActionsMenuAnchor] = useState<null | HTMLElement>(null)
@@ -470,8 +466,9 @@ function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
         opacity: scrollY > 50 ? 0 : 1,
         maxHeight: scrollY > 50 ? 0 : '200px',
         overflow: 'hidden',
-        transition: 'all 0.3s ease',
-        pointerEvents: scrollY > 50 ? 'none' : 'auto'
+        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        pointerEvents: scrollY > 50 ? 'none' : 'auto',
+        transform: scrollY > 50 ? 'translateY(-20px)' : 'translateY(0)'
       }}>
         <Card sx={{
           borderRadius: '12px',
@@ -640,11 +637,23 @@ function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
                             flexShrink: 0,
                             marginLeft: '12px',
                             cursor: 'pointer',
-                            transition: 'all 0.2s ease'
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            transform: completedTasks.includes(task.id) ? 'scale(1.1)' : 'scale(1)',
+                            '&:hover': {
+                              transform: completedTasks.includes(task.id) ? 'scale(1.15)' : 'scale(1.05)',
+                              backgroundColor: completedTasks.includes(task.id) ? '#d32f2f' : 'rgba(226, 49, 81, 0.1)'
+                            }
                           }}
                         >
                           {completedTasks.includes(task.id) && (
-                            <FontAwesomeIcon icon={faCheck} style={{ fontSize: '0.8rem', color: 'white' }} />
+                            <FontAwesomeIcon 
+                              icon={faCheck} 
+                              style={{ 
+                                fontSize: '0.8rem', 
+                                color: 'white',
+                                animation: 'fadeInScale 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                              }} 
+                            />
                           )}
                         </Box>
                       )}
@@ -802,8 +811,9 @@ function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
             opacity: scrollY > 50 ? 0 : 1,
             maxHeight: scrollY > 50 ? 0 : '80px',
             overflow: 'hidden',
-            transition: 'all 0.3s ease',
-            pointerEvents: scrollY > 50 ? 'none' : 'auto'
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            pointerEvents: scrollY > 50 ? 'none' : 'auto',
+            transform: scrollY > 50 ? 'translateY(20px)' : 'translateY(0)'
           }}>
             <Box sx={{
               display: 'flex',
@@ -908,7 +918,6 @@ function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
           <MenuItem
             key={action}
             onClick={() => {
-              setSelectedAction(action)
                               setActionsMenuAnchor(null)
                 // Handle the action here
                 if (action === 'Submit for review') {

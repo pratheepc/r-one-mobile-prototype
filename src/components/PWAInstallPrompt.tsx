@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 interface PWAInstallPromptProps {
   onInstall?: () => void
@@ -7,27 +7,21 @@ interface PWAInstallPromptProps {
 
 function PWAInstallPrompt({ onInstall, onDismiss }: PWAInstallPromptProps) {
   const [showPrompt, setShowPrompt] = useState(false)
-  const [isIOS, setIsIOS] = useState(false)
-  const [isAndroid, setIsAndroid] = useState(false)
-  const [isStandalone, setIsStandalone] = useState(false)
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
 
   useEffect(() => {
     // Check if running on iOS
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
-    setIsIOS(iOS)
 
     // Check if running on Android
     const android = /Android/.test(navigator.userAgent)
-    setIsAndroid(android)
 
     // Check if app is already installed (running in standalone mode)
     const standalone = window.matchMedia('(display-mode: standalone)').matches
-    setIsStandalone(standalone)
 
     console.log('PWA Debug Info:', {
       userAgent: navigator.userAgent,
-      isIOS,
+      isIOS: iOS,
       isAndroid: android,
       isStandalone: standalone,
       hasServiceWorker: 'serviceWorker' in navigator

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Box, Typography, Card, CardContent, Chip, IconButton, Tabs, Tab, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
@@ -6,7 +6,6 @@ import {
   faInfoCircle, 
   faShare, 
   faThumbsUp, 
-  faArrowRight,
   faShareAlt,
   faPaperclip,
   faPaperPlane
@@ -291,7 +290,7 @@ function InstallationChecklist({ onBack }: { onBack: () => void }) {
       }}>
         {activeTab === 0 ? (
           // Checklist Tab - Task List
-          tasks.map((task, index) => (
+          tasks.map((task) => (
             <Card key={task.id} sx={{
               marginBottom: '8px',
               borderRadius: '12px',

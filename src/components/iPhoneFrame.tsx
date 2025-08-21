@@ -1,13 +1,14 @@
-import React from 'react'
+
+import { ReactNode } from 'react'
 import StatusBar from './StatusBar'
 import NavigationBar from './NavigationBar'
 import HomeIndicator from './HomeIndicator'
 
 interface iPhoneFrameProps {
-  children: React.ReactNode
+  children: ReactNode
   title?: string
-  leftButton?: React.ReactNode
-  rightButton?: React.ReactNode
+  leftButton?: ReactNode
+  rightButton?: ReactNode
   showStatusBar?: boolean
   showNavBar?: boolean
   showHomeIndicator?: boolean
