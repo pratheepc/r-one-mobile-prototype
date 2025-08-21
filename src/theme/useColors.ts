@@ -55,4 +55,4 @@ export const useColors = () => {
 }
 
 // Export colors for direct import
-export { colors, withOpacity, lighten, darken }
+export { colors }

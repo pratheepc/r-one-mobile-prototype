@@ -1,0 +1,9 @@
+---
+alwaysApply: true
+---
+- This is a mobile app prototype and all the code you write should be for mobile app sizes.
+- All visual elements, sections, pages etc should be mobile responsive
+- Stick to WCAG 2.1 Level AA accessibility at all point in time
+- Use Google Material 3 UI design library throughout
+- Use Fontawesome icons for all the icons
+- Stick to mobile app accessibility best practices like tap target of 48pt

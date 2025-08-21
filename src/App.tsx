@@ -5,15 +5,19 @@ import {
   faMap,
   faWrench,
   faQrcode,
-  faCogs,
-  faBars
+  faSearch,
+  faUser
 } from '@fortawesome/free-solid-svg-icons'
 import { useColors } from './theme/useColors'
 import SafeArea from './components/SafeArea'
+import MapScreen from './pages/MapScreen'
+import WorkScreen from './pages/WorkScreen'
+import PWAInstallPrompt from './components/PWAInstallPrompt'
 
 function App() {
   const colors = useColors()
   const [value, setValue] = React.useState(0)
+  const [showInstallationDetails, setShowInstallationDetails] = React.useState(false)
 
   return (
     <Box sx={{
@@ -23,46 +27,100 @@ function App() {
       flexDirection: 'column'
     }}>
       {/* Fixed Header with Safe Area */}
-      <SafeArea variant="top" fixed>
-        <AppBar
-          position="static"
-          sx={{
-            background: colors.gradients.primary,
-            boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
-            borderRadius: 0,
-            minHeight: 'auto',
-            '@media (max-width: 480px)': {
+      {!showInstallationDetails && (
+        <SafeArea variant="top" fixed>
+          <AppBar
+            position="static"
+            sx={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+              borderRadius: 0,
               minHeight: 'auto',
-            }
-          }}
-        >
+              zIndex: 1000,
+              '@media (max-width: 480px)': {
+                minHeight: 'auto',
+              }
+            }}
+          >
           <Toolbar sx={{
             minHeight: 'auto',
             paddingTop: 'env(safe-area-inset-top)',
             paddingY: { xs: 1, sm: 1.5, md: 2 },
+            paddingX: { xs: 2, sm: 3 },
             '@media (max-width: 480px)': {
               paddingY: 0.5,
+              paddingX: 1.5,
             }
           }}>
-            <Typography
-              variant="h5"
-              fontWeight={500}
-              sx={{
-                color: 'white',
-                flexGrow: 1,
-                fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
-                lineHeight: { xs: 1.2, sm: 1.3, md: 1.4 }
-              }}
-            >
-              R-One App
-            </Typography>
+            {/* Greeting */}
+            <Box sx={{ flexGrow: 1 }}>
+              <Typography
+                variant="h5"
+                fontWeight={600}
+                sx={{
+                  color: 'rgba(0, 0, 0, 0.85)',
+                  fontSize: { xs: '1.3rem', sm: '1.5rem', md: '1.7rem' },
+                  lineHeight: 1.2,
+                  marginBottom: '2px',
+                  textShadow: '0px 1px 2px rgba(255, 255, 255, 0.3)'
+                }}
+              >
+                Hey <span style={{ color: '#E23151' }}>John</span>
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: 'rgba(0, 0, 0, 0.7)',
+                  fontSize: { xs: '0.85rem', sm: '0.9rem' },
+                  fontWeight: 400,
+                  textShadow: '0px 1px 2px rgba(255, 255, 255, 0.2)'
+                }}
+              >
+                Your work for the day
+              </Typography>
+            </Box>
           </Toolbar>
         </AppBar>
       </SafeArea>
+      )}
 
-      {/* Empty Content Area */}
+      {/* Content Area */}
       <SafeArea variant="content">
-        <Box sx={{ flex: 1 }} />
+        <Box sx={{ 
+          flex: 1, 
+          height: '100vh',
+          position: 'relative',
+          overflow: 'hidden',
+          paddingTop: showInstallationDetails ? '0' : 'env(safe-area-inset-top)'
+        }}>
+          {value === 0 && <MapScreen />}
+          {value === 1 && <WorkScreen onInstallationDetailsChange={setShowInstallationDetails} />}
+          {value === 3 && (
+            <Box sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              height: '100%',
+              color: colors.textSecondary 
+            }}>
+              <Typography variant="h6">Search Screen</Typography>
+            </Box>
+          )}
+          {value === 4 && (
+            <Box sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              height: '100%',
+              color: colors.textSecondary 
+            }}>
+              <Typography variant="h6">Profile Screen</Typography>
+            </Box>
+          )}
+        </Box>
       </SafeArea>
 
       {/* Fixed Bottom Navigation with Safe Area */}
@@ -73,14 +131,15 @@ function App() {
             background: colors.surface,
             borderTop: `1px solid ${colors.surfaceVariant}`,
             paddingBottom: 'env(safe-area-inset-bottom)',
-            minHeight: 'auto'
+            minHeight: 'auto',
+            zIndex: 1000
           }}
         >
           {/* Main Bottom Navigation */}
           <BottomNavigation
             value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue)
+            onChange={(_, newValue) => {
+              setValue(newValue as number)
             }}
             showLabels
             sx={{
@@ -92,23 +151,13 @@ function App() {
                 color: colors.textSecondary,
                 transition: 'all 0.2s ease-in-out',
                 '&.Mui-selected': {
-                  color: 'transparent',
-                  background: colors.gradients.primary,
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
+                  color: colors.primary,
                   '& .MuiBottomNavigationAction-label': {
-                    background: colors.gradients.primary,
-                    backgroundClip: 'text',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
+                    color: colors.primary,
                     fontWeight: 600,
                   },
                   '& .MuiSvgIcon-root': {
-                    background: colors.gradients.primary,
-                    backgroundClip: 'text',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
+                    color: colors.primary,
                   },
                 },
                 '& .MuiBottomNavigationAction-label': {
@@ -130,7 +179,7 @@ function App() {
           >
             <BottomNavigationAction
               label="Map"
-              value="map"
+              value={0}
               icon={<FontAwesomeIcon icon={faMap} style={{ fontSize: '1.2rem' }} />}
               sx={{
                 flex: 1,
@@ -138,8 +187,8 @@ function App() {
               }}
             />
             <BottomNavigationAction
-              label="Installation"
-              value="installation"
+              label="Work"
+              value={1}
               icon={<FontAwesomeIcon icon={faWrench} style={{ fontSize: '1.2rem' }} />}
               sx={{
                 flex: 1,
@@ -149,18 +198,18 @@ function App() {
             {/* Empty space for FAB */}
             <Box sx={{ flex: 1, maxWidth: '20%' }} />
             <BottomNavigationAction
-              label="Service"
-              value="service"
-              icon={<FontAwesomeIcon icon={faCogs} style={{ fontSize: '1.2rem' }} />}
+              label="Search"
+              value={3}
+              icon={<FontAwesomeIcon icon={faSearch} style={{ fontSize: '1.2rem' }} />}
               sx={{
                 flex: 1,
                 maxWidth: '20%',
               }}
             />
             <BottomNavigationAction
-              label="More"
-              value="more"
-              icon={<FontAwesomeIcon icon={faBars} style={{ fontSize: '1.2rem' }} />}
+              label="Profile"
+              value={4}
+              icon={<FontAwesomeIcon icon={faUser} style={{ fontSize: '1.2rem' }} />}
               sx={{
                 flex: 1,
                 maxWidth: '20%',
@@ -196,8 +245,8 @@ function App() {
               },
             }}
             onClick={() => {
-              setValue('r-vision')
               // Handle R-Vision action
+              console.log('R-Vision clicked')
             }}
           >
             <FontAwesomeIcon
@@ -210,6 +259,9 @@ function App() {
           </Fab>
         </Box>
       </SafeArea>
+
+      {/* PWA Install Prompt */}
+      <PWAInstallPrompt />
     </Box>
   )
 }

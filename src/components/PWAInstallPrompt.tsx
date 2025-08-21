@@ -8,24 +8,63 @@ interface PWAInstallPromptProps {
 function PWAInstallPrompt({ onInstall, onDismiss }: PWAInstallPromptProps) {
   const [showPrompt, setShowPrompt] = useState(false)
   const [isIOS, setIsIOS] = useState(false)
+  const [isAndroid, setIsAndroid] = useState(false)
   const [isStandalone, setIsStandalone] = useState(false)
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
 
   useEffect(() => {
     // Check if running on iOS
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
     setIsIOS(iOS)
 
+    // Check if running on Android
+    const android = /Android/.test(navigator.userAgent)
+    setIsAndroid(android)
+
     // Check if app is already installed (running in standalone mode)
     const standalone = window.matchMedia('(display-mode: standalone)').matches
     setIsStandalone(standalone)
 
-    // Show prompt if on iOS and not in standalone mode
-    if (iOS && !standalone) {
+    // Listen for beforeinstallprompt event (Android)
+    const handleBeforeInstallPrompt = (e: any) => {
+      e.preventDefault()
+      setDeferredPrompt(e)
       setShowPrompt(true)
+    }
+
+    // Listen for appinstalled event
+    const handleAppInstalled = () => {
+      setShowPrompt(false)
+      setDeferredPrompt(null)
+      console.log('PWA was installed')
+    }
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+    window.addEventListener('appinstalled', handleAppInstalled)
+
+    // Show prompt only for Android browsers and not in standalone mode
+    if (android && !standalone) {
+      setShowPrompt(true)
+    }
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
+      window.removeEventListener('appinstalled', handleAppInstalled)
     }
   }, [])
 
-  const handleInstall = () => {
+  const handleInstall = async () => {
+    if (deferredPrompt) {
+      // Show the install prompt for Android
+      deferredPrompt.prompt()
+      const { outcome } = await deferredPrompt.userChoice
+      if (outcome === 'accepted') {
+        console.log('User accepted the install prompt')
+      } else {
+        console.log('User dismissed the install prompt')
+      }
+      setDeferredPrompt(null)
+    }
     setShowPrompt(false)
     onInstall?.()
   }
@@ -102,11 +141,9 @@ function PWAInstallPrompt({ onInstall, onDismiss }: PWAInstallPromptProps) {
           textAlign: 'left'
         }}>
           <strong>How to install:</strong>
-          <ol style={{ margin: '8px 0 0 16px', padding: 0 }}>
-            <li>Tap the Share button</li>
-            <li>Scroll down and tap "Add to Home Screen"</li>
-            <li>Tap "Add" to confirm</li>
-          </ol>
+          <p style={{ margin: '8px 0 0 0', padding: 0 }}>
+            Tap "Install" below to add this app to your home screen
+          </p>
         </div>
 
         <div style={{
