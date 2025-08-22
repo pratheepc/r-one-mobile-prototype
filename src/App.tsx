@@ -21,10 +21,15 @@ function App() {
 
   return (
     <Box sx={{
-      minHeight: '100vh',
+      minHeight: '-webkit-fill-available',
       bgcolor: 'background.default',
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      width: '100%',
+      overflowX: 'hidden',
+      '@media (max-width: 768px)': {
+        minHeight: '-webkit-fill-available',
+      }
     }}>
       {/* Fixed Header with Safe Area */}
       {!showInstallationDetails && (
