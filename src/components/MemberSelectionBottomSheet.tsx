@@ -144,7 +144,7 @@ function MemberSelectionBottomSheet({
           position: 'relative',
           width: '100%',
           maxWidth: '100%',
-          maxHeight: '80vh',
+          maxHeight: '85vh',
           backgroundColor: 'white',
           borderTopLeftRadius: '16px',
           borderTopRightRadius: '16px',
@@ -159,7 +159,7 @@ function MemberSelectionBottomSheet({
           display: 'flex', 
           flexDirection: 'column', 
           height: '100%',
-          maxHeight: '80vh'
+          maxHeight: '85vh'
         }}>
           {/* Fixed Header Section */}
           <Box sx={{ 
