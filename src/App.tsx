@@ -37,11 +37,11 @@ function App() {
           <AppBar
             position="static"
             sx={{
-              background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-              boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+              background: 'rgba(255, 255, 255, 0.15)',
+              backdropFilter: 'blur(25px)',
+              WebkitBackdropFilter: 'blur(25px)',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.25)',
+              boxShadow: '0px 8px 32px rgba(0, 0, 0, 0.08), 0px 2px 8px rgba(0, 0, 0, 0.06)',
               borderRadius: 0,
               minHeight: 'auto',
               zIndex: 1000,
@@ -133,8 +133,11 @@ function App() {
         <Box
           sx={{
             position: 'relative',
-            background: colors.surface,
-            borderTop: `1px solid ${colors.surfaceVariant}`,
+            background: 'rgba(255, 255, 255, 0.15)',
+            backdropFilter: 'blur(25px)',
+            WebkitBackdropFilter: 'blur(25px)',
+            borderTop: '1px solid rgba(255, 255, 255, 0.25)',
+            boxShadow: '0px -8px 32px rgba(0, 0, 0, 0.08), 0px -2px 8px rgba(0, 0, 0, 0.06)',
             paddingBottom: 'env(safe-area-inset-bottom)',
             minHeight: 'auto',
             zIndex: 1000
@@ -153,31 +156,34 @@ function App() {
               '& .MuiBottomNavigationAction-root': {
                 minWidth: 'auto',
                 padding: '6px 4px',
-                color: colors.textSecondary,
-                transition: 'all 0.2s ease-in-out',
+                color: 'rgba(0, 0, 0, 0.7)',
+                transition: 'all 0.3s ease-in-out',
                 '&.Mui-selected': {
-                  color: colors.primary,
+                  color: '#E23151',
                   '& .MuiBottomNavigationAction-label': {
-                    color: colors.primary,
+                    color: '#E23151',
                     fontWeight: 600,
                   },
                   '& .MuiSvgIcon-root': {
-                    color: colors.primary,
+                    color: '#E23151',
                   },
                 },
                 '& .MuiBottomNavigationAction-label': {
                   fontSize: '0.7rem',
                   fontWeight: 500,
                   marginTop: '6px',
-                  transition: 'all 0.2s ease-in-out',
+                  transition: 'all 0.3s ease-in-out',
                 },
                 '& .MuiSvgIcon-root': {
                   fontSize: '1.2rem',
-                  transition: 'all 0.2s ease-in-out',
+                  transition: 'all 0.3s ease-in-out',
                 },
                 '&:hover': {
-                  color: colors.primary,
-                  transform: 'translateY(-1px)',
+                  color: '#E23151',
+                  transform: 'translateY(-2px)',
+                  '& .MuiSvgIcon-root': {
+                    transform: 'scale(1.1)',
+                  },
                 },
               },
             }}
