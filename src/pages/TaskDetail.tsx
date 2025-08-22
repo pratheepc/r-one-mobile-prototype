@@ -458,17 +458,11 @@ function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
         </Box>
       </Box>
 
-      {/* Animated Project Overview Card */}
+      {/* Project Overview Card */}
       <Box sx={{ 
         padding: '16px',
         paddingTop: '0px',
-        marginTop: '-8px',
-        opacity: scrollY > 50 ? 0 : 1,
-        maxHeight: scrollY > 50 ? 0 : '200px',
-        overflow: 'hidden',
-        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-        pointerEvents: scrollY > 50 ? 'none' : 'auto',
-        transform: scrollY > 50 ? 'translateY(-20px)' : 'translateY(0)'
+        marginTop: '-8px'
       }}>
         <Card sx={{
           borderRadius: '12px',
@@ -476,30 +470,10 @@ function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
           border: 'none',
           backgroundColor: 'white'
         }}>
-          <CardContent sx={{ padding: '4px 12px' }}>
-            {/* Schedule Section */}
-            <Box sx={{ marginBottom: '0px' }}>
-              <Typography sx={{ fontSize: '0.8rem', color: '#666', marginBottom: '2px' }}>
-                Schedule
-              </Typography>
-              <Typography sx={{ fontSize: '0.9rem', color: '#000000', fontWeight: 500 }}>
-                12 November 2024 - 13 November 2024
-              </Typography>
-            </Box>
-            
-            {/* Stage Section */}
-            <Box sx={{ marginBottom: '8px' }}>
-              <Typography sx={{ fontSize: '0.8rem', color: '#666', marginBottom: '2px' }}>
-                Stage
-              </Typography>
-              <Typography sx={{ fontSize: '0.9rem', color: '#E23151', fontWeight: 500 }}>
-                Survey
-              </Typography>
-            </Box>
-
+          <CardContent sx={{ padding: '12px' }}>
             {/* Members Section */}
             <Box>
-              <Typography sx={{ fontSize: '0.8rem', color: '#666', marginBottom: '4px' }}>
+              <Typography sx={{ fontSize: '0.8rem', color: '#666', marginBottom: '8px' }}>
                 Members
               </Typography>
               <Box sx={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
