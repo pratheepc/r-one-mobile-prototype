@@ -222,113 +222,99 @@ function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
       case 'images':
         return (
           <Box sx={{ marginTop: '8px' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: '12px', position: 'relative' }}>
-              <Box sx={{ 
-                display: 'flex', 
-                gap: '12px', 
-                overflowX: 'auto',
-                flex: 1,
-                paddingBottom: '8px',
-                paddingRight: '8px',
-                scrollBehavior: 'smooth',
-                WebkitOverflowScrolling: 'touch',
-                '&::-webkit-scrollbar': {
-                  height: '6px'
-                },
-                '&::-webkit-scrollbar-track': {
-                  background: '#f1f1f1',
-                  borderRadius: '3px',
-                  margin: '0 4px'
-                },
-                '&::-webkit-scrollbar-thumb': {
-                  background: '#E23151',
-                  borderRadius: '3px',
-                  '&:hover': {
-                    background: '#d42a47'
-                  }
-                },
-                '&::-webkit-scrollbar-thumb:hover': {
+            <Box sx={{ 
+              display: 'flex', 
+              gap: '12px', 
+              overflowX: 'auto',
+              paddingBottom: '8px',
+              paddingRight: '8px',
+              scrollBehavior: 'smooth',
+              WebkitOverflowScrolling: 'touch',
+              '&::-webkit-scrollbar': {
+                height: '6px'
+              },
+              '&::-webkit-scrollbar-track': {
+                background: '#f1f1f1',
+                borderRadius: '3px',
+                margin: '0 4px'
+              },
+              '&::-webkit-scrollbar-thumb': {
+                background: '#E23151',
+                borderRadius: '3px',
+                '&:hover': {
                   background: '#d42a47'
-                },
-                '&::-webkit-scrollbar-corner': {
-                  background: 'transparent'
                 }
-              }}>
-                {task.images.map((file: any, index: number) => (
-                  <Box
-                    key={index}
+              },
+              '&::-webkit-scrollbar-thumb:hover': {
+                background: '#d42a47'
+              },
+              '&::-webkit-scrollbar-corner': {
+                background: 'transparent'
+              }
+            }}>
+              {task.images.map((file: any, index: number) => (
+                <Box
+                  key={index}
+                  sx={{
+                    position: 'relative',
+                    width: '80px',
+                    height: '80px',
+                    backgroundColor: '#e0e0e0',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    overflow: 'hidden'
+                  }}
+                >
+                  {file.type === 'image' ? (
+                    <img 
+                      src={file.path} 
+                      alt={file.name}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        borderRadius: '8px'
+                      }}
+                    />
+                  ) : (
+                    <Box sx={{ textAlign: 'center' }}>
+                      <FontAwesomeIcon 
+                        icon={file.type === 'pdf' ? faFilePdf : faVideo} 
+                        style={{ 
+                          fontSize: '1.5rem', 
+                          color: file.type === 'pdf' ? '#E23151' : '#1976D2',
+                          marginBottom: '4px'
+                        }} 
+                      />
+                      <Typography sx={{ fontSize: '0.6rem', color: '#666', lineHeight: 1 }}>
+                        {file.name.split('.')[0]}
+                      </Typography>
+                    </Box>
+                  )}
+                  <IconButton
+                    size="small"
+                    onClick={() => handleDeleteAttachment(task.id, index)}
                     sx={{
-                      position: 'relative',
-                      width: '80px',
-                      height: '80px',
-                      backgroundColor: '#e0e0e0',
-                      borderRadius: '8px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                      overflow: 'hidden'
+                      position: 'absolute',
+                      top: '4px',
+                      right: '4px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                      width: '20px',
+                      height: '20px',
+                      '&:hover': {
+                        backgroundColor: 'rgba(255, 255, 255, 1)'
+                      }
                     }}
                   >
-                    {file.type === 'image' ? (
-                      <img 
-                        src={file.path} 
-                        alt={file.name}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          borderRadius: '8px'
-                        }}
-                      />
-                    ) : (
-                      <Box sx={{ textAlign: 'center' }}>
-                        <FontAwesomeIcon 
-                          icon={file.type === 'pdf' ? faFilePdf : faVideo} 
-                          style={{ 
-                            fontSize: '1.5rem', 
-                            color: file.type === 'pdf' ? '#E23151' : '#1976D2',
-                            marginBottom: '4px'
-                          }} 
-                        />
-                        <Typography sx={{ fontSize: '0.6rem', color: '#666', lineHeight: 1 }}>
-                          {file.name.split('.')[0]}
-                        </Typography>
-                      </Box>
-                    )}
-                    <IconButton
-                      size="small"
-                      onClick={() => handleDeleteAttachment(task.id, index)}
-                      sx={{
-                        position: 'absolute',
-                        top: '4px',
-                        right: '4px',
-                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                        width: '20px',
-                        height: '20px',
-                        '&:hover': {
-                          backgroundColor: 'rgba(255, 255, 255, 1)'
-                        }
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faTrash} style={{ fontSize: '0.7rem', color: '#E23151' }} />
-                    </IconButton>
-                  </Box>
-                ))}
-              </Box>
-              {/* Gradient fade indicator for scroll */}
-              <Box
-                sx={{
-                  position: 'absolute',
-                  right: '0',
-                  top: '0',
-                  bottom: '0',
-                  width: '20px',
-                  background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.8))',
-                  pointerEvents: 'none',
-                  zIndex: 1
-                }}
-              />
+                    <FontAwesomeIcon icon={faTrash} style={{ fontSize: '0.7rem', color: '#E23151' }} />
+                  </IconButton>
+                </Box>
+              ))}
+              
+              {/* Plus button inside scrollable container */}
               <Box
                 sx={{
                   width: '80px',
