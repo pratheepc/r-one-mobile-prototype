@@ -25,7 +25,6 @@ import {
   faChevronLeft,
   faInfoCircle,
   faShareAlt,
-  faPlus,
   faTrash,
   faCheck,
   faPaperPlane,
@@ -331,7 +330,19 @@ function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
                   }
                 }}
               >
-                <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1.5rem', color: '#E23151' }} />
+                <Box sx={{ 
+                  fontSize: '1.5rem', 
+                  color: '#E23151',
+                  fontWeight: 'bold',
+                  lineHeight: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                  height: '100%'
+                }}>
+                  +
+                </Box>
               </Box>
             </Box>
           </Box>
@@ -495,7 +506,19 @@ function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
                     setMemberSheetOpen(true)
                   }}
                 >
-                  <FontAwesomeIcon icon={faPlus} style={{ fontSize: '0.7rem' }} />
+                  <Box sx={{ 
+                    fontSize: '0.7rem', 
+                    color: '#E23151',
+                    fontWeight: 'bold',
+                    lineHeight: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '100%',
+                    height: '100%'
+                  }}>
+                    +
+                  </Box>
                 </IconButton>
               </Box>
             </Box>
