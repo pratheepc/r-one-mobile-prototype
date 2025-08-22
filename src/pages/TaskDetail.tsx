@@ -221,6 +221,40 @@ function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
       case 'images':
         return (
           <Box sx={{ marginTop: '8px' }}>
+            {/* Plus button positioned above attachments */}
+            <Box sx={{ marginBottom: '12px' }}>
+              <Box
+                sx={{
+                  width: '80px',
+                  height: '80px',
+                  backgroundColor: '#FFF5F5',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    backgroundColor: '#FFE6E6'
+                  }
+                }}
+              >
+                <Box sx={{ 
+                  fontSize: '1.5rem', 
+                  color: '#E23151',
+                  fontWeight: 'bold',
+                  lineHeight: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                  height: '100%'
+                }}>
+                  +
+                </Box>
+              </Box>
+            </Box>
+
+            {/* Horizontal scrolling attachments */}
             <Box sx={{ 
               display: 'flex', 
               gap: '12px', 
@@ -312,38 +346,6 @@ function TaskDetail({ onBack, taskId = 'WID001' }: TaskDetailProps) {
                   </IconButton>
                 </Box>
               ))}
-              
-              {/* Plus button inside scrollable container */}
-              <Box
-                sx={{
-                  width: '80px',
-                  height: '80px',
-                  backgroundColor: '#FFF5F5',
-                  borderRadius: '8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                  cursor: 'pointer',
-                  '&:hover': {
-                    backgroundColor: '#FFE6E6'
-                  }
-                }}
-              >
-                <Box sx={{ 
-                  fontSize: '1.5rem', 
-                  color: '#E23151',
-                  fontWeight: 'bold',
-                  lineHeight: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '100%',
-                  height: '100%'
-                }}>
-                  +
-                </Box>
-              </Box>
             </Box>
           </Box>
         )
